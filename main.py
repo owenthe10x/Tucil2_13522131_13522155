@@ -12,7 +12,7 @@ clock = pygame.time.Clock()
 fps = 60
 
 font = pygame.font.Font("freesansbold.ttf", 32)
-
+smallFont = pygame.font.Font("freesansbold.ttf", 20)
 # colors
 white = (235, 235, 235)
 black = (20, 20, 20)
@@ -32,12 +32,24 @@ quadratic_curve_bruteforce = []
 quadratic_curve_dnc = []
 
 # components
-input_p0x = pygame.Rect(800, 550, 50, 25)
-input_p0y = pygame.Rect(910, 550, 50, 25)
-input_p1x = pygame.Rect(800, 600, 50, 25)
-input_p1y = pygame.Rect(910, 600, 50, 25)
-input_p2x = pygame.Rect(800, 650, 50, 25)
-input_p2y = pygame.Rect(910, 650, 50, 25)
+label_p0x = smallFont.render("x: ", True, black)
+label_p0y = smallFont.render("y: ", True, black)
+label_p1x = smallFont.render("x: ", True, black)
+label_p1y = smallFont.render("y: ", True, black)
+label_p2x = smallFont.render("x: ", True, black)
+label_p2y = smallFont.render("y: ", True, black)
+rect_p0x = label_p0x.get_rect()
+rect_p0y = label_p0y.get_rect()
+rect_p1x = label_p1x.get_rect()
+rect_p1y = label_p1y.get_rect()
+rect_p2x = label_p2x.get_rect()
+rect_p2y = label_p2y.get_rect()
+input_p0x = pygame.Rect(width // 2.3, (height // 4), 50, 25)
+input_p0y = pygame.Rect((width // 2.3) + 150, (height // 4), 50, 25)
+input_p1x = pygame.Rect(width // 2.3, (height // 4) + 50, 50, 25)
+input_p1y = pygame.Rect((width // 2.3) + 150, (height // 4) + 50, 50, 25)
+input_p2x = pygame.Rect(width // 2.3, (height // 4) + 100, 50, 25)
+input_p2y = pygame.Rect((width // 2.3) + 150, (height // 4) + 100, 50, 25)
 text_p0x = ""
 text_p0y = ""
 text_p1x = ""
@@ -48,6 +60,13 @@ text_p2y = ""
 run = True
 while run:
     screen.fill(white)
+    screen.blit(label_p0x, ((width // 2.3) - 20, (height // 4)))
+    screen.blit(label_p0y, (((width // 2.3) - 20) + 150, (height // 4)))
+    screen.blit(label_p1x, ((width // 2.3) - 20, (height // 4) + 50))
+    screen.blit(label_p1y, (((width // 2.3) - 20) + 150, (height // 4) + 50))
+    screen.blit(label_p2x, ((width // 2.3) - 20, (height // 4) + 100, 50, 25))
+    screen.blit(label_p2y, (((width // 2.3) - 20) + 150, (height // 4) + 100))
+
     clock.tick(fps)
     pygame.display.set_caption("Bezier Curve Brute Force vs Divide and Conquer ")
 
