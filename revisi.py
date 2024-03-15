@@ -1,14 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def bezier_curve(points, t):
+def divide_n_conquer(points, t):
     if len(points) == 1:
         return points[0]
     else:
-        new_points = []
-        for i in range(len(points) - 1):
-            new_points.append((1 - t) * points[i] + t * points[i + 1])
-        return bezier_curve(new_points, t)
+        left_points = [point for point in points[:-1]]
+        right_points = [point for point in points[1:]]
+        return (1 - t) * divide_n_conquer(left_points, t) + t * divide_n_conquer(right_points, t)
+
+def bezier_curve(control_points, t):
+    return divide_n_conquer(control_points, t)
 
 def plot_bezier_curve(control_points, num_points=100):
     t_values = np.linspace(0, 1, num_points)
