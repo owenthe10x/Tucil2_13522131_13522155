@@ -21,15 +21,4 @@ def plot_bezier_curve(control_points, num_points=100):
     plt.plot(control_points[:, 0], control_points[:, 1], 'ro-')
     plt.show()
 
-def get_input():
-    control_points = []
-    for i in range(3):
-        point = input(f"Masukkan titik kontrol {i+1} (format: x,y): ")
-        x, y = map(float, point.split(","))
-        control_points.append([x, y])
-    num_iterations = int(input("Masukkan jumlah iterasi: "))
-    return np.array(control_points), num_iterations
 
-if __name__ == "__main__":
-    control_points, num_iterations = get_input()
-    plot_bezier_curve(control_points, num_iterations + 2)

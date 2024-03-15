@@ -33,7 +33,7 @@ import numpy as np
         return (int(curve[0]), int(curve[1]))
 '''
 
-def quadratic_bezier(positions, t):
+def quadratic_bezier_bf(positions, t):
     x0 = pow((1 - t), 2) * positions[0][0]
     y0 = pow((1 - t), 2) * positions[0][1]
 
@@ -47,14 +47,9 @@ def quadratic_bezier(positions, t):
 
 def plot_curve(positions):
     t_values = np.linspace(0, 1, 100)
-    curve_points = np.array([quadratic_bezier(positions, t) for t in t_values])
+    curve_points = np.array([quadratic_bezier_bf(positions, t) for t in t_values])
 
     plt.figure()
     plt.plot(curve_points[:, 0], curve_points[:, 1], 'b-')
     plt.plot([p[0] for p in positions], [p[1] for p in positions], 'ro-')
     plt.show()
-
-# Example usage:
-if __name__ == "__main__":
-    positions = [[0, 0], [1, 3], [2, -1]]
-    plot_curve(positions)
