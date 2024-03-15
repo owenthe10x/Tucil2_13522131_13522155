@@ -23,7 +23,7 @@ color_passive = pygame.Color("lightskyblue3")
 
 # parameters
 t = 0
-speed = 0.002
+iteration = 10
 active_input = "None"
 
 
@@ -195,6 +195,7 @@ while run:
         Position(1300, 550, "P1"),
         Position(1200, 450, "P2"),
     ]
+    print("t adalah", t)
     quadraticBezier(
         Quadratic_positions_bruteforce,
         t,
@@ -222,7 +223,9 @@ while run:
     for point in Quadratic_positions_dnc:
         point.display(screen, black)
 
-    t += speed
+    t += 1 / iteration
     pygame.display.update()
+
+    pygame.time.wait(500)
 
 pygame.quit()
