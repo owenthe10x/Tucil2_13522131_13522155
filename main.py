@@ -7,6 +7,7 @@ import time
 
 
 def plot_bezier_curve(control_points, num_points=100, method="bruteforce"):
+
     fig, ax = plt.subplots()
     (line,) = ax.plot([], [], lw=2)
     (linehelper,) = ax.plot([], [], lw=2)
@@ -23,33 +24,18 @@ def plot_bezier_curve(control_points, num_points=100, method="bruteforce"):
     def animate(frame):
         t_values = np.linspace(0, 1, frame + 1)
         bezier_points = []
-        bezier_helper1 = []
-        bezier_helper2 = []
+        total_time = 0
+
         start_time = time.perf_counter()
         for i in range(len(t_values)):
             if method == "divideandconquer":
                 bezier_points.append(bezier_dnc(control_points, t_values[i]))
             else:
                 bezier_points.append(bezier_bf(control_points, t_values[i]))
-                bezier_helper1.append(
-                    linear_bezier_bf(
-                        [control_points[0], control_points[1]], t_values[i]
-                    )
-                )
-                bezier_helper2.append(
-                    (
-                        linear_bezier_bf(
-                            [control_points[1], control_points[2]], t_values[i]
-                        )
-                    )
-                )
-
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
-
+        total_time += elapsed_time
         # Plot control points and lines connecting them
-        x = [control_points[4, 0], control_points[1, 0]]
-        y = [control_points[4, 1], control_points[1, 1]]
         x = []
         y = []
         for point in bezier_points:
@@ -75,14 +61,16 @@ def plot_bezier_curve(control_points, num_points=100, method="bruteforce"):
             min(min(y), min(control_points[:, 1])) - 0.1,
             max(max(y), max(control_points[:, 1])) + 0.1,
         )
-        print(f"Execution time: {elapsed_time} seconds")
         # Check if the animation has reached its last frame
         if frame == 0:
             # pause for 2 seconds
-            time.sleep(0.5)
+            ax.set_title(f"Total time for {method} algorithm: {total_time} seconds")
+            time.sleep(2)
         return line, points, linehelper, pointhelper1, pointhelper2
 
-    ani = FuncAnimation(fig, animate, frames=num_points, init_func=init, blit=True)
+    ani = FuncAnimation(
+        fig, animate, frames=num_points, init_func=init, blit=True, repeat=False
+    )
     plt.show()
 
 
@@ -114,18 +102,18 @@ def get_input():
 
 
 if __name__ == "__main__":
-    control_points, num_iterations, method = get_input()
-    # control_points = np.array(
-    #     [
-    #         [-2, -3],
-    #         [-3, -2],
-    #         [0, -2],
-    #         [0.5, -2.5],
-    #         [1, -3],
-    #         [2, 1],
-    #     ]
-    # )
-    # method = "divideandconquer"
-    # num_iterations = 16
+    # control_points, num_iterations, method = get_input()
+    control_points = np.array(
+        [
+            [-2, -3],
+            [-3, -2],
+            [0, -2],
+            [0.5, -2.5],
+            [1, -3],
+            [2, 1],
+        ]
+    )
+    method = "bruteforce"
+    num_iterations = 16
     # +2 karena pada plotting ada 2 frame yang digunakan untuk render titik dan garis kontrol
     plot_bezier_curve(control_points, num_iterations + 2, method)
