@@ -2,8 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
 import time
-import sys
-sys.path.append('src')
 from bruteforce import bezier_bf
 from divideandconquer import bezier_dnc
 
@@ -82,24 +80,64 @@ def iterasi(n):
         return 1
     else:
         return 2 * iterasi(n - 1) + 1
+    
+def is_int(value):
+    try:
+        int(value)
+        return True
+    except ValueError:
+        return False
+    
+def is_float(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
 
+def is_valid_point(point):
+    components = point.split(',')
+    if len(components) != 2:
+        return False
+    x, y = components
+    return is_float(x) and is_float(y)
 
 def get_input():
     control_points = []
-    titik = int(input("Masukkan jumlah titik kontrol: "))
+    titik = input("Masukkan jumlah titik kontrol: ")
+    while is_int(titik) == False:
+        print("Input jumlah titik harus berupa angka ya :D")
+        titik = input("Masukkan jumlah titik kontrol: ")
+    titik = int(titik)
+
     for i in range(titik):
         point = input(f"Masukkan titik kontrol {i+1} (format: x,y): ")
+        while is_valid_point(point) == False:
+            print("Input tidak valid, pastikan formatnya 'x,y' ya, dan jangan lupa x serta y nya hanya boleh int atau float :D")
+            point = input(f"Masukkan titik kontrol {i+1} (format: x,y): ")
         x, y = map(float, point.split(","))
         control_points.append([x, y])
-    num_iterations = int(input("Masukkan jumlah iterasi: "))
+
+    num_iterations = input("Masukkan jumlah iterasi: ")
+    while is_int(num_iterations) == False:
+        print("Iterasi harus berupa angka ya :D")
+        num_iterations = input("Masukkan jumlah iterasi: ")
+    num_iterations = int(num_iterations)
+
     print("Metode yang tersedia:")
     print("1. Divide and Conquer")
     print("2. Brute Force")
+
     method = input("Masukkan metode (1/2): ")
+    while is_int(method) == False or (method != "1" and method != "2"):
+        print("Hayoo mau input apa itu? method harus berupa angka 1 atau 2 ya :D")
+        method = input("Masukkan metode (1/2): ")
+
     if method == "1":
         method = "divideandconquer"
-    else:
+    elif method == "2":
         method = "bruteforce"
+
     num_iteration = iterasi(num_iterations)
     return np.array(control_points), num_iteration, method
 
