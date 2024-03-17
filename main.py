@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
-from bruteforce import quadratic_bezier_bf, linear_bezier_bf, bezier_bf
+from bruteforce import bezier_bf
 from divideandconquer import bezier_dnc
 import time
 
@@ -114,18 +114,18 @@ def get_input():
 
 
 if __name__ == "__main__":
-    # control_points, num_iterations, method = get_input()
-    control_points = np.array(
-        [
-            [-2, -3],
-            [-3, -2],
-            [0, -2],
-            [0.5, -2.5],
-            [1, -3],
-            [2, 1],
-        ]
-    )
-    method = "divideandconquer"
-    num_iterations = 16
+    control_points, num_iterations, method = get_input()
+    # control_points = np.array(
+    #     [
+    #         [-2, -3],
+    #         [-3, -2],
+    #         [0, -2],
+    #         [0.5, -2.5],
+    #         [1, -3],
+    #         [2, 1],
+    #     ]
+    # )
+    # method = "divideandconquer"
+    # num_iterations = 16
     # +2 karena pada plotting ada 2 frame yang digunakan untuk render titik dan garis kontrol
     plot_bezier_curve(control_points, num_iterations + 2, method)
