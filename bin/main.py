@@ -105,7 +105,6 @@ def get_input():
 
 
 if __name__ == "__main__":
-    print(sys.path)
     control_points, num_iterations, method = get_input()
     # control_points = np.array(
     #     [
