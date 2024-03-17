@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
+import time
+import sys
+sys.path.append('src')
 from bruteforce import bezier_bf
 from divideandconquer import bezier_dnc
-import time
+
 
 
 def plot_bezier_curve(control_points, num_points=100, method="bruteforce"):
@@ -102,6 +105,7 @@ def get_input():
 
 
 if __name__ == "__main__":
+    print(sys.path)
     control_points, num_iterations, method = get_input()
     # control_points = np.array(
     #     [
