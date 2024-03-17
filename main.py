@@ -102,18 +102,18 @@ def get_input():
 
 
 if __name__ == "__main__":
-    # control_points, num_iterations, method = get_input()
-    control_points = np.array(
-        [
-            [-2, -3],
-            [-3, -2],
-            [0, -2],
-            [0.5, -2.5],
-            [1, -3],
-            [2, 1],
-        ]
-    )
-    method = "bruteforce"
-    num_iterations = 16
+    control_points, num_iterations, method = get_input()
+    # control_points = np.array(
+    #     [
+    #         [-2, -3],
+    #         [-3, -2],
+    #         [0, -2],
+    #         [0.5, -2.5],
+    #         [1, -3],
+    #         [2, 1],
+    #     ]
+    # )
+    # method = "divideandconquer"
+    # num_iterations = 16
     # +2 karena pada plotting ada 2 frame yang digunakan untuk render titik dan garis kontrol
     plot_bezier_curve(control_points, num_iterations + 2, method)
