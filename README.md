@@ -1,4 +1,4 @@
-# Tucil2_STIMA
+# Tucil2_13522131_13522155
 > Membangun Kurva Bézier dengan Algoritma Titik Tengah berbasis Divide and Conquer.
 
 ## Table of Contents
@@ -24,14 +24,14 @@ conda install matplotlib
 ```
 
 ## Usage
-1. pastikan pengguna sudah menginstall semua setup agar program bisa berjalan
-2. masuk ke dalam folder src
-3. buka terminal
-4. ketik command berikut ke dalam terminal:
+1. Pastikan pengguna sudah menginstall semua setup agar program bisa berjalan
+2. Masuk ke dalam folder src
+3. Buka terminal
+4. Ketik command berikut ke dalam terminal:
 ```
 python main.py
 ```
-5. inputlah sesuai dengan apa yang ditampilkanm di terminal
+5. Masukkan input sesuai dengan apa yang diminta di terminal
 6. _Then prepare to be Amazed_ 😎
 
 ## Creator
